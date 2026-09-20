@@ -1,0 +1,14 @@
+# Ignore files for Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Ignore OS files
+.DS_Store
+Thumbs.db
+
+# Ignore node_modules if using npm
+node_modules/
+
+# Ignore build files
+dist/
+build/

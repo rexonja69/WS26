@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EON Design Workshop</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <div class="container">
+        <header>
+            <div class="logo-container">
+                <img src="assets/logo.svg" alt="Logo" class="logo" onerror="this.style.display='none'">
+            </div>
+            <h1>EON Design Workshop</h1>
+        </header>
+
+        <section class="wheels-section">
+            <div class="wheel-container">
+                <div class="wheel-header">
+                    <h2>Team Assignment</h2>
+                    <button class="fullscreen-btn" data-wheel="teamWheel">⛶</button>
+                </div>
+                <canvas id="teamWheel" width="400" height="400"></canvas>
+                <button id="spinTeamBtn" class="spin-btn">Spin for Team</button>
+                <div id="teamResult" class="result-display"></div>
+            </div>
+
+            <div class="wheel-container">
+                <div class="wheel-header">
+                    <h2>Art Epoch</h2>
+                    <button class="fullscreen-btn" data-wheel="epochWheel">⛶</button>
+                </div>
+                <canvas id="epochWheel" width="400" height="400"></canvas>
+                <button id="spinEpochBtn" class="spin-btn">Spin for Epoch</button>
+                <div id="epochResult" class="result-display"></div>
+            </div>
+
+            <div class="wheel-container">
+                <div class="wheel-header">
+                    <h2>Creative Task</h2>
+                    <button class="fullscreen-btn" data-wheel="taskWheel">⛶</button>
+                </div>
+                <canvas id="taskWheel" width="400" height="400"></canvas>
+                <button id="spinTaskBtn" class="spin-btn">Spin for Task</button>
+                <div id="taskResult" class="result-display"></div>
+            </div>
+        </section>
+
+        <section class="config-section" id="configSection" style="display: none;">
+            <h2>Configuration</h2>
+            <div class="config-panel">
+                <div class="config-group">
+                    <h3>Participants (16 names, one per line)</h3>
+                    <textarea id="participantsInput" placeholder="Enter 16 participant names, one per line"></textarea>
+                    <button id="saveParticipantsBtn" class="config-btn">Save Participants</button>
+                </div>
+                <div class="config-group">
+                    <h3>Epoch Numbers (one per line)</h3>
+                    <textarea id="epochsInput" placeholder="Enter epoch numbers, one per line"></textarea>
+                    <button id="saveEpochsBtn" class="config-btn">Save Epochs</button>
+                </div>
+                <div class="config-group">
+                    <h3>Tasks (one per line)</h3>
+                    <textarea id="tasksInput" placeholder="Enter creative tasks, one per line"></textarea>
+                    <button id="saveTasksBtn" class="config-btn">Save Tasks</button>
+                </div>
+            </div>
+            <button id="closeConfigBtn" class="close-btn">Close Configuration</button>
+        </section>
+
+        <button id="openConfigBtn" class="open-config-btn">⚙️</button>
+
+        <section class="results-section">
+            <h2>Results</h2>
+            <div class="results-controls">
+                <button id="clearResultsBtn" class="clear-btn">Clear All Results</button>
+                <button id="exportResultsBtn" class="export-btn">Export Results</button>
+            </div>
+            <div class="table-container">
+                <table id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th>Team #</th>
+                            <th>Member 1</th>
+                            <th>Member 2</th>
+                            <th>Epoch</th>
+                            <th>Task</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBody">
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
