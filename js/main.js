@@ -1,22 +1,28 @@
 // Default data
 const defaultParticipants = [
-    'Person 1', 'Person 2', 'Person 3', 'Person 4',
-    'Person 5', 'Person 6', 'Person 7', 'Person 8',
-    'Person 9', 'Person 10', 'Person 11', 'Person 12',
-    'Person 13', 'Person 14', 'Person 15', 'Person 16'
+    'Matej Geberc', 'Giorgos Chatziioannidis',
+    'Anja Janjoš', 'Süleyman Görkem Taşdemir',
+    'Valentina Piršlin', 'Agnieszka Kiraga',
+    'Filip Tashkov', 'Serdal Eryılmaz',
+    'Katarina Milanović', 'Ljubica',
+    'Nilsu Koşok', 'Jonathan Majoros',
+    'Begüm Özdemir', 'Iorga Justin Cristian', 'Ece Ovayurt'
 ];
 
-const defaultEpochs = ['1', '2', '3', '4', '5', '6', '7', '8'];
+const defaultEpochs = [
+    '1', '2', '3', '4', '5', '6', '7'
+];
 
 const defaultTasks = [
-    'Create a minimalist poster',
-    'Design a typographic composition',
-    'Illustrate a scene',
-    'Design a logo',
-    'Create a color palette',
-    'Design packaging',
-    'Create an icon set',
-    'Design a book cover'
+    'Postcard from the Past / Future',
+    'Teaser Movie Poster',
+    'Wedding Invitation Poster',
+    'Vinyl Album Cover Art',
+    'Art Magazine Cover',
+    'Street Art & Wall Mural Concept',
+    'Collectible / Trading Card',
+    'Stylized Book Cover',
+    'Festival Lineup Poster'
 ];
 
 // State
@@ -30,9 +36,9 @@ let currentTeamMember = 1;
 let results = [];
 let usedParticipantIndices = new Set(); // Track which original indices have been used
 
-// Deterministic random-looking selection order for 16 participants
+// Deterministic random-looking selection order for 15 participants
 // This order will always be the same but appears random
-const selectionOrder = [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15];
+const selectionOrder = [0, 7, 3, 10, 5, 12, 1, 8, 4, 11, 6, 13, 2, 9, 14];
 
 // Colors for wheel segments
 const colors = [
@@ -410,21 +416,38 @@ async function handleTeamSpin() {
     usedParticipantIndices.add(targetIndex);
 
     // Handle team assignment
+    // Teams 1-6 have 2 members, Team 7 has 3 members
+    const isTeam7 = currentTeamNumber === 7;
+    const maxMembers = isTeam7 ? 3 : 2;
+
     if (currentTeamMember === 1) {
         // First member of team
         results.push({
             teamNumber: currentTeamNumber,
             member1: selectedPerson,
             member2: '',
+            member3: '',
             epoch: '',
             task: ''
         });
         currentTeamMember = 2;
-    } else {
+    } else if (currentTeamMember === 2) {
         // Second member of team
         const teamIndex = results.findIndex(r => r.teamNumber === currentTeamNumber && r.member2 === '');
         if (teamIndex !== -1) {
             results[teamIndex].member2 = selectedPerson;
+        }
+        if (isTeam7) {
+            currentTeamMember = 3;
+        } else {
+            currentTeamMember = 1;
+            currentTeamNumber++;
+        }
+    } else {
+        // Third member (only for team 7)
+        const teamIndex = results.findIndex(r => r.teamNumber === currentTeamNumber && r.member3 === '');
+        if (teamIndex !== -1) {
+            results[teamIndex].member3 = selectedPerson;
         }
         currentTeamMember = 1;
         currentTeamNumber++;
@@ -511,8 +534,8 @@ function saveParticipants() {
     const input = document.getElementById('participantsInput').value;
     const names = input.split('\n').map(n => n.trim()).filter(n => n);
     
-    if (names.length !== 16) {
-        alert('Please enter exactly 16 participant names!');
+    if (names.length !== 15) {
+        alert('Please enter exactly 15 participant names!');
         return;
     }
 
@@ -566,10 +589,12 @@ function renderResults() {
 
     results.forEach(result => {
         const row = document.createElement('tr');
+        const member3 = result.member3 || '-';
         row.innerHTML = `
             <td>Team ${result.teamNumber}</td>
             <td>${result.member1}</td>
             <td>${result.member2}</td>
+            <td>${member3}</td>
             <td>${result.epoch || '-'}</td>
             <td>${result.task || '-'}</td>
         `;
@@ -610,12 +635,17 @@ function exportResults() {
         return;
     }
 
-    const dataStr = JSON.stringify(results, null, 2);
-    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    // Convert to CSV format
+    let csv = 'Team #,Member 1,Member 2,Member 3,Epoch,Task\n';
+    results.forEach(result => {
+        csv += `${result.teamNumber},${result.member1},${result.member2},${result.member3 || ''},${result.epoch || ''},${result.task || ''}\n`;
+    });
+
+    const dataBlob = new Blob([csv], { type: 'text/csv' });
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = 'wheel-spin-results.json';
+    link.download = 'wheel-spin-results.csv';
     link.click();
     URL.revokeObjectURL(url);
 }
