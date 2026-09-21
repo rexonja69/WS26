@@ -1,12 +1,20 @@
 // Default data
 const defaultParticipants = [
-    'Matej Geberc', 'Giorgos Chatziioannidis',
-    'Anja Janjoš', 'Süleyman Görkem Taşdemir',
-    'Valentina Piršlin', 'Agnieszka Kiraga',
-    'Filip Tashkov', 'Serdal Eryılmaz',
-    'Katarina Milanović', 'Ljubica',
-    'Nilsu Koşok', 'Jonathan Majoros',
-    'Begüm Özdemir', 'Iorga Justin Cristian', 'Ece Ovayurt'
+    'Matej Geberc',           // 0 -> Team 1, Member 1
+    'Filip Tashkov',          // 1 -> Team 4, Member 1
+    'Begüm Özdemir',          // 2 -> Team 7, Member 1
+    'Anja Janjoš',            // 3 -> Team 2, Member 1
+    'Katarina Milanović',     // 4 -> Team 5, Member 1
+    'Valentina Piršlin',      // 5 -> Team 3, Member 1
+    'Nilsu Koşok',            // 6 -> Team 6, Member 1
+    'Giorgos Chatziioannidis', // 7 -> Team 1, Member 2
+    'Serdal Eryılmaz',        // 8 -> Team 4, Member 2
+    'Iorga Justin Cristian',  // 9 -> Team 7, Member 2
+    'Süleyman Görkem Taşdemir', // 10 -> Team 2, Member 2
+    'Ljubica',                // 11 -> Team 5, Member 2
+    'Agnieszka Kiraga',       // 12 -> Team 3, Member 2
+    'Jonathan Majoros',       // 13 -> Team 6, Member 2
+    'Ece Ovayurt'             // 14 -> Team 7, Member 3
 ];
 
 const defaultEpochs = [

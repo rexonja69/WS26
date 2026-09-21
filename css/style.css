@@ -65,7 +65,7 @@ h2 {
 
 .wheels-section {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
     gap: 30px;
     margin-bottom: 50px;
 }
@@ -74,8 +74,8 @@ h2 {
     background: rgba(13, 13, 43, 0.8);
     border: 2px solid #00f0ff;
     border-radius: 15px;
-    padding: 30px;
     text-align: center;
+    padding: 10px;
     box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
     position: relative;
 }
@@ -85,6 +85,7 @@ h2 {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    padding: 30px;
 }
 
 .wheel-header h2 {
